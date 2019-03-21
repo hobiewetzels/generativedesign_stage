@@ -1,4 +1,88 @@
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <style>
+    #art{
+        width: 970px;
+        height: 250px;
+        position: absolute;
+        top: 0;
+        margin-top: 10px;
+        z-index: 100;
+    }
+    .backdrop{
+        background-image: linear-gradient(180deg, white, grey);
+        height: 40%;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+    }
+    #art img{
+        width: 40%;
+        position: absolute;
+        z-index: 110;
+        left: calc(50% - 194px);
+    }
+    .cta{
+        background-color: #4BA82E;
+        padding: 10px 20px 10px 20px;
+        position: absolute;
+        text-transform: uppercase;
+        color: white;
+        font-family: 'Open Sans', sans-serif;
+        border-radius: 5px;
+        font-size: 0.8em;
+        right: 0;
+        bottom: 0;
+        margin-bottom: 30px;
+        margin-right: 70px;
+    }
+    .text{
+        margin-left: 70px;
+        margin-top: 50px;
+        font-family: 'Open Sans', sans-serif;
+        color: white;
+        position: absolute;
+        width: 20%;
+    }
+    .text h1, .text h2{
+        margin: 0;
+    }
+    .text h1{
+        font-size: 1.3em;
+    }
+    .text h2{
+        font-size: 0.9em;
+    }
+    #buttonArt{
+        margin: 10px;
+        background-color: #f2f2f2;
+        width: 150px;
+        text-align: center;
+        padding: 5px;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 0.8em;
+    }
+    .hidden{
+        display: none;
+    }
 </style>
 <script src="js/processing.js"></script> 
 <canvas data-processing-sources="js/script.pde"></canvas>
+<div id="art">
+    <div class="backdrop"></div>
+    <div class=text>
+    <h1>SUPERB</h1>
+    <h2>Profiteer nu van nog meer voordeel</h2>
+    </div>
+    <img src="images\TRIMLINE_SUPERCO_STYLEBU_door-5_rim-PJ2_lamp-PN0_color-1Z1Z_view-01.png" alt="">
+    <div class=cta>ontdek meer</div>
+</div>
+<div id="buttonArt" onclick='toggle()'>toggle art</div>
+
+<script>
+function toggle() {
+    var element = document.getElementById("art");
+    element.classList.toggle("hidden");
+}
+</script>

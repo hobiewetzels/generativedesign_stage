@@ -22,7 +22,7 @@ void setup()
 void draw()
 {
   //redraw background
-  //background(255);
+  background(50);
 
   //increase
 
@@ -68,7 +68,5 @@ void draw()
   }
   angle += 0.05;
   //LOG
-  println(sin(angle));
+  //println(sin(angle));
 }
-
-//setGradient function
