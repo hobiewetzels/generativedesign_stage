@@ -1,6 +1,7 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <style>
     #art{
+        display: none;
         width: 970px;
         height: 250px;
         position: absolute;
@@ -63,8 +64,8 @@
         font-family: 'Open Sans', sans-serif;
         font-size: 0.8em;
     }
-    .hidden{
-        display: none;
+    .visible{
+        display: block !important;
     }
 </style>
 <script src="js/processing.js"></script> 
@@ -83,6 +84,6 @@
 <script>
 function toggle() {
     var element = document.getElementById("art");
-    element.classList.toggle("hidden");
+    element.classList.toggle("visible");
 }
 </script>
