@@ -1,25 +1,26 @@
 //global vars
-int numBalls = 50;
+int numBalls = 300;
 Ball[] balls = new Ball[numBalls];
 int angle = 0;
 int mousexpos;
 int mouseypos;
 int distX;
 int distY;
+
 // Runs on initial load
 
 void setup()
 {
   size(970, 250);
   
-  background(100);
+  background(255);
 
   loop();
 
   smooth();
 
   for (int i = 0; i < numBalls; i++) {
-    balls[i] = new Ball(random(970), random(150) , random(20) + 5, random(255), i);
+    balls[i] = new Ball(random(970), random(250) , random(60) + 30, random(255), i, false);
   }
 
 }
@@ -29,14 +30,14 @@ void setup()
 // Runs repeatedly until exit() is called.
 void draw()
 {  
-  background(150);
+  background(255);
 
   for (int i = 0; i < numBalls; i++) {
 
 
 
     balls[i].display();
-    //balls[i].move();
+    
     //balls[i].loop();
     balls[i].collide();
 
@@ -50,21 +51,33 @@ class Ball {
   int y;
   int r;
   int id;
-  int clr;
+  int clrR;
+  int clrG;
+  int clrB;
+  boolean grow;
+  int startR;
+  int startClr;
+  int opacity;
 
-Ball(int xin, int yin, int rin, int clrin, int idin){
+Ball(int xin, int yin, int rin, int clrin, int idin, boolean grow){
   x = xin;
   y = yin;
   r = rin;
   id = idin;
-  clr = clrin;
+  clrR = clrin;
+  clrG = clrin;
+  clrB = clrin;
+  grow = false;
+  startR = r;
+  startClr = clrin;
+  opacity = 0;
 }
 void move(){
-
+  //x += 1;
 }
 void display() {
   noStroke();
-  fill(clr, 100);
+  fill(clrR, clrG, clrB, opacity);
   ellipse(x, y, r, r);
   angle += 0.02;
 
@@ -74,11 +87,22 @@ void collide(){
     for (int i = 0; i < numBalls; i++) {
     distX = Math.abs(balls[i].x - mousexpos);
     distY = Math.abs(balls[i].y - mouseypos);
-    if (distX < balls[i].r  && distY < balls[i].r){
-      balls[i].grow = true;
-    }
-    if (balls[i].grow == true){
-      balls[i].r += 0.1;
+    if (distX < balls[i].r / 2  && distY < balls[i].r / 2 && balls[i].grow == false && balls[i].r < 400){
+      balls[i].r += 0.01;
+      balls[i].move();
+      balls[i].opacity += 0.1;
+    }else{
+      //return to start radius
+      if (balls[i].r > balls[i].startR){
+        balls[i].r -= 0.005;
+        }
+      //return to start opacity
+        if (balls[i].opacity > 0){
+        balls[i].opacity -= 0.005;
+      }
+        //reset color to start value
+      
+
     }
     }
 

@@ -8,7 +8,7 @@ void setup()
 {
   size(970, 250);
   
-  background(100);
+  background(255);
 
   loop();
 
