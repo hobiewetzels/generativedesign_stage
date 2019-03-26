@@ -1,14 +1,26 @@
 //global vars
-int numBalls = 300;
+int numBalls = 600;
 Ball[] balls = new Ball[numBalls];
 int angle = 0;
 int mousexpos;
 int mouseypos;
 int distX;
 int distY;
+int model;
+int clrPick;
+int triggerPick;
+
+//create color pallets
+//pick a model
+
+color[] colors = new color[4];
+colors[0] = #FF5100;
+colors[1] = #FF9426;
+colors[2] = #FFFFFF;
+colors[3] = #FF513B;
+
 
 // Runs on initial load
-
 void setup()
 {
   size(970, 250);
@@ -20,8 +32,15 @@ void setup()
   smooth();
 
   for (int i = 0; i < numBalls; i++) {
-    balls[i] = new Ball(random(970), random(250) , random(60) + 30, random(255), i, false);
+    clrPick = round(random(3));
+    balls[i] = new Ball(random(-100, 970), random(250) , random(60) + 15, colors[clrPick], i, false);
   }
+  //set triggers
+  for (int i = 0; i < 10; i++){
+    triggerPick = round(random(numBalls));
+    balls[triggerPick].triggerset = true;
+  }
+
 
 }
 
@@ -33,13 +52,10 @@ void draw()
   background(255);
 
   for (int i = 0; i < numBalls; i++) {
-
-
-
     balls[i].display();
-    
-    //balls[i].loop();
+    balls[i].move();
     balls[i].collide();
+    balls[i].trigger();
 
   }
 
@@ -51,35 +67,34 @@ class Ball {
   int y;
   int r;
   int id;
-  int clrR;
-  int clrG;
-  int clrB;
-  boolean grow;
+  int clr;
   int startR;
   int startClr;
   int opacity;
+  boolean triggerset;
 
-Ball(int xin, int yin, int rin, int clrin, int idin, boolean grow){
+Ball(int xin, int yin, int rin, int clrin, int idin, boolean triggerin){
   x = xin;
   y = yin;
   r = rin;
   id = idin;
-  clrR = clrin;
-  clrG = clrin;
-  clrB = clrin;
-  grow = false;
+  clr = clrin;
+  triggerset = triggerin;
   startR = r;
   startClr = clrin;
   opacity = 0;
 }
 void move(){
-  //x += 1;
+  x += 1;
+  if (x > 970 + 100){
+    x = -100;
+  }
 }
 void display() {
   noStroke();
-  fill(clrR, clrG, clrB, opacity);
+  fill(clr, opacity);
   ellipse(x, y, r, r);
-  angle += 0.02;
+
 
 }
 void collide(){
@@ -87,10 +102,9 @@ void collide(){
     for (int i = 0; i < numBalls; i++) {
     distX = Math.abs(balls[i].x - mousexpos);
     distY = Math.abs(balls[i].y - mouseypos);
-    if (distX < balls[i].r / 2  && distY < balls[i].r / 2 && balls[i].grow == false && balls[i].r < 400){
-      balls[i].r += 0.01;
-      balls[i].move();
-      balls[i].opacity += 0.1;
+    if (distX < balls[i].r / 2  && distY < balls[i].r / 2 && balls[i].r < 300){
+      balls[i].r += 0.0025;
+      balls[i].opacity += 0.025;
     }else{
       //return to start radius
       if (balls[i].r > balls[i].startR){
@@ -105,17 +119,23 @@ void collide(){
 
     }
     }
+}
+void trigger(){
+  for (int i = 0; i < numBalls; i++) {
+    if (balls[i].triggerset == true){
+      
+      //grow
+      balls[i].r = sin(angle) * (i / 10) + (i / 10);
+      balls[i].opacity = sin(angle) * (i / 10) + (i / 10);
+      angle += 0.000008;
 
-  
-}
-void loop(){
-  if (x > 970){
-    x = 0;
-  }
-  if (y > 275){
-    y = -100;
+
+    }else{
+
+    }
   }
 }
+
 //end
 }
 $( "#art" ).mousemove(function( event ) {
