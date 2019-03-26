@@ -9,15 +9,25 @@ int distY;
 int model;
 int clrPick;
 int triggerPick;
+int currentModel = 0;
 
+
+//put models into array
+string[] models = new string[4];
+models[0] = "images/Trimlinecards-SEAT-Arona-Xcellence.png";
+models[1] = "images/TRIMLINE_SUPERCO_STYLEBU_door-5_rim-PJ2_lamp-PN0_color-1Z1Z_view-01.png";
+models[2] = "images/SEAT Ibiza FR png.png";
+models[3] = "";
+
+console.log(models);
 //create color pallets
 //pick a model
-
 color[] colors = new color[4];
 colors[0] = #FF5100;
 colors[1] = #FF9426;
 colors[2] = #FFFFFF;
 colors[3] = #FF513B;
+
 
 
 // Runs on initial load
@@ -56,7 +66,6 @@ void draw()
     balls[i].move();
     balls[i].collide();
     balls[i].trigger();
-
   }
 
     
@@ -141,4 +150,39 @@ void trigger(){
 $( "#art" ).mousemove(function( event ) {
   mousexpos = event.pageX;
   mouseypos = event.pageY;
+});
+$( ".buttonSlideImg1" ).click(function() {
+  currentModel -= 1;
+  //reset
+  if(currentModel == -1){
+    currentModel = 3;
+  }
+  console.log(currentModel);
+  $(".artImg").attr("src", models[currentModel]);
+});
+$( ".buttonSlideImg2" ).click(function() {
+  currentModel += 1;
+  //reset
+  if(currentModel == 4){
+    currentModel = 0;
+  }
+  //change image
+  $(".artImg").attr("src", models[currentModel]);
+
+  
+  //change color set
+  if (currentModel == 1){
+    colors[0] = #000000;
+    colors[1] = #FFFFFF;
+    colors[2] = #E3E3E3;
+    colors[3] = #C4C4C4;
+  }
+  //change gradient
+  $(".backdrop").css("background-image", "linear-gradient(180deg, white,#" + hex(colors[0], 6) + ")");
+  //change ball color
+  for (int i = 0; i < numBalls; i++) {
+    clrPick = round(random(3));
+    balls[i].clr = colors[clrPick];
+  }
+
 });
