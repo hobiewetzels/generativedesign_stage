@@ -14,10 +14,10 @@ int currentModel = 0;
 
 //put models into array
 string[] models = new string[4];
-models[0] = "images/Trimlinecards-SEAT-Arona-Xcellence.png";
-models[1] = "images/TRIMLINE_SUPERCO_STYLEBU_door-5_rim-PJ2_lamp-PN0_color-1Z1Z_view-01.png";
-models[2] = "images/SEAT Ibiza FR png.png";
-models[3] = "";
+models[0] = "images/seat-model-(1).png";
+models[1] = "images/seat-model-(2).png";
+models[2] = "images/seat-model-(3).png";
+models[3] = "images/seat-model-(4).png";
 
 console.log(models);
 //create color pallets
@@ -147,19 +147,63 @@ void trigger(){
 
 //end
 }
+
+//track mouse position
 $( "#art" ).mousemove(function( event ) {
   mousexpos = event.pageX;
   mouseypos = event.pageY;
 });
+
+//previous
 $( ".buttonSlideImg1" ).click(function() {
   currentModel -= 1;
   //reset
   if(currentModel == -1){
     currentModel = 3;
   }
-  console.log(currentModel);
+  //change image
   $(".artImg").attr("src", models[currentModel]);
+
+  //change color set
+  switch (currentModel){
+    //orange
+    case 0:
+      colors[0] = #FF5100;
+      colors[1] = #FF9426;
+      colors[2] = #FFFFFF;
+      colors[3] = #FF513B;
+      break;
+    //black
+    case 1: 
+      colors[0] = #000000;
+      colors[1] = #FFFFFF;
+      colors[2] = #E3E3E3;
+      colors[3] = #C4C4C4;
+      break;
+    //red
+    case 2: 
+      colors[0] = #FF0000;
+      colors[1] = #FFFFFF;
+      colors[2] = #FF3F00;
+      colors[3] = #FF0049;
+      break;
+    //blue
+    case 3:
+      colors[0] = #0F43FF;
+      colors[1] = #FFFFFF;
+      colors[2] = #0F7FFF;
+      colors[3] = #0FCEFF;
+  }
+  //change gradient
+  //$(".backdrop").css("background-image", "linear-gradient(180deg, white,#" + hex(colors[0], 6) + ")");
+  //change ball color
+  for (int i = 0; i < numBalls; i++) {
+    clrPick = round(random(3));
+    balls[i].clr = colors[clrPick];
+  }
 });
+
+//next
 $( ".buttonSlideImg2" ).click(function() {
   currentModel += 1;
   //reset
@@ -171,18 +215,51 @@ $( ".buttonSlideImg2" ).click(function() {
 
   
   //change color set
-  if (currentModel == 1){
-    colors[0] = #000000;
-    colors[1] = #FFFFFF;
-    colors[2] = #E3E3E3;
-    colors[3] = #C4C4C4;
+  switch (currentModel){
+    //orange
+    case 0:
+      colors[0] = #FF5100;
+      colors[1] = #FF9426;
+      colors[2] = #FFFFFF;
+      colors[3] = #FF513B;
+      break;
+    //black
+    case 1: 
+      colors[0] = #000000;
+      colors[1] = #FFFFFF;
+      colors[2] = #E3E3E3;
+      colors[3] = #C4C4C4;
+      break;
+    //red
+    case 2: 
+      colors[0] = #FF0000;
+      colors[1] = #FFFFFF;
+      colors[2] = #FF3F00;
+      colors[3] = #FF0049;
+      break;
+    //blue
+    case 3:
+      colors[0] = #07A8FF;
+      colors[1] = #FFFFFF;
+      colors[2] = #0F43FF;
+      colors[3] = #0FCEFF;
   }
   //change gradient
-  $(".backdrop").css("background-image", "linear-gradient(180deg, white,#" + hex(colors[0], 6) + ")");
+  //$(".backdrop").css("background-image", "linear-gradient(180deg, white,#" + hex(colors[0], 6) + ")");
   //change ball color
   for (int i = 0; i < numBalls; i++) {
     clrPick = round(random(3));
     balls[i].clr = colors[clrPick];
   }
+});
 
+  //start timer
+var timer;
+setInterval(function() {
+    timer += 1;
+}, 1000);
+
+
+$( ".cta" ).click(function() {
+alert("time: " + timer + "s");
 });

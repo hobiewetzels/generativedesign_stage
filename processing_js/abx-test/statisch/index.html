@@ -1,4 +1,4 @@
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <style>
     #art{
@@ -10,22 +10,25 @@
         z-index: 100;
     }
     .backdrop{
-        background-image: linear-gradient(180deg, white, FF8386);
+        background-image: linear-gradient(180deg, white, grey);
         height: 40%;
         width: 100%;
         position: absolute;
         bottom: 0;
     }
-    #art img{
-        width: 40%;
+    .artImg{
+        bottom: 10%;
+        width: 60%;
         position: absolute;
         z-index: 110;
-        left: calc(50% - 194px);
+        left: calc(50% - 291px);
     }
     .cta{
+        cursor: pointer;
         background-color: #4BA82E;
         padding: 10px 20px 10px 20px;
         position: absolute;
+        z-index: 99999;
         text-transform: uppercase;
         color: white;
         font-family: 'Open Sans', sans-serif;
@@ -37,10 +40,10 @@
         margin-right: 70px;
     }
     .text{
-        margin-left: 70px;
+        margin-left: 105px;
         margin-top: 50px;
         font-family: 'Open Sans', sans-serif;
-        color: white;
+        color: black;
         position: absolute;
         width: 20%;
     }
@@ -67,17 +70,43 @@
     .visible{
         display: none !important;
     }
+    .buttonSlideImg1{
+        width: 50px;
+        position: absolute;
+        z-index: 100;
+        bottom: 0;
+        transform: rotate(180deg);
+        bottom: calc(50% - 25px);
+        margin-left: 20px;
+    }
+    .buttonSlideImg1:hover{
+        cursor: pointer;
+    }
+    .buttonSlideImg2{
+        width: 50px;
+        position: absolute;
+        z-index: 100;
+        bottom: calc(50% - 25px);
+        margin-right: 20px;
+        right: 0;
+
+    }
+    .buttonSlideImg2:hover{
+        cursor: pointer;
+    }
 </style>
 <script src="js/processing.js"></script> 
 <canvas data-processing-sources="js/script.pde"></canvas>
 <div id="art">
     <div class="backdrop"></div>
+    <img src="images/right-arrow.png" alt="" class="buttonSlideImg1">
     <div class=text>
     <h1>SUPERB</h1>
     <h2>Profiteer nu van nog meer voordeel</h2>
     </div>
-    <img src="images\TRIMLINE_SUPERCO_STYLEBU_door-5_rim-PJ2_lamp-PN0_color-1Z1Z_view-01.png" alt="">
+    <img class="artImg" src="images\seat-model-(1).png" alt="">
     <div class=cta>ontdek meer</div>
+    <img src="images/right-arrow.png" alt="" class="buttonSlideImg2">
 </div>
 <div id="buttonArt" onclick='toggle()'>toggle art</div>
 
