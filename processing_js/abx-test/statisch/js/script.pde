@@ -43,7 +43,7 @@ void setup()
 
   for (int i = 0; i < numBalls; i++) {
     clrPick = round(random(3));
-    balls[i] = new Ball(random(-100, 970), random(250) , random(60) + 15, colors[clrPick], i, random(70) + 20, true);
+    balls[i] = new Ball(random(-100, 970), random(125) + 125 , random(60) + 15, colors[clrPick], i, random(70) + 20, true);
   }
 
 
